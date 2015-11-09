@@ -5,15 +5,21 @@
 
 //Delay function waste time counting. 32767 is largest positive 16 bit 2CN number
 void delay() {      
-    int delaycount = 0;
-    for (delaycount = 0; delaycount<(32767/4); delaycount++);  //works with "RUN"  
-    //for (delaycount = 0; delaycount<2; delaycount++);  	   //works with "STEP INTO"  
- }   
+    int delaycount = 0;	
+   		if (PORTJbits.RJ6 ==0) {		
+			for (delaycount = 0; delaycount<(32767/4); delaycount++);  //works with "RUN"  
+  
 
+	}else { 
+			for (delaycount = 0; delaycount<(32767); delaycount++);
+//for (delaycount = 0; delaycount<2; delaycount++);  	   //works with "STEP INTO"  
+ 			}   
+		
+	}
 //main program
 void main(void) {      
     int counter = 0;   
-    TRISJ = 0xff;	// all bits of portJ are set 1 as input      
+    TRISJ = 0xff;		// all bits of portJ are set 1 as input      
     TRISE = 0x00; 		// all bits of portE are set 0 as output      
     PORTE = 0x00; 		// turn off all led's   
 
@@ -35,5 +41,5 @@ void main(void) {
        }   
      
     }       
- }   
+ }  
  
